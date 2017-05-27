@@ -43,9 +43,12 @@ print("Reading files completed.")
 html_util = open("utils/raw.html", "r")
 html_util_content = html_util.read()
 
+css_util = open("utils/styles.css", "r")
+css_util_content = css_util.read()
+
 print("Reading utls completed.")
 
-# Saving final html file
+# Saving final files
 save_file = open(output_path + "index.html", "w")
 save_content = ""
 
@@ -61,4 +64,8 @@ after_html_file = "</div>" \
                   "</html>"
 
 save_file.write(html_util_content + save_content + after_html_file)
+
+css_file = open(output_path + "styles.css", "w")
+css_file.write(css_util_content)
+
 print("Writing html file completed.")

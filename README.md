@@ -74,6 +74,7 @@ And your documentation is ready! Just look into output directory
 * Clone this repository in catalog where is all header files or down in hierarchy
 * To change template of HTML file or modificate CSS, modify files in utils catalog
 * Don't close HTML tags in utils/raw.html file, those tags will be added in script
+* If you want to create documentation files in other directory, first create those (without files, catalog only)
 
 ## Licensing
 To see the license of documentator, open <a href="https://github.com/bjornus/documentator/blob/master/LICENSE" target="_blank">LICENSE</a> file.
