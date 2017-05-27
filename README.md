@@ -1,7 +1,5 @@
 # documentator
 
-documentator is simple Python tool to create documentation from C/C++ headers
-=======
 is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
 ## Installation
