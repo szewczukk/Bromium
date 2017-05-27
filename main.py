@@ -39,9 +39,13 @@ for file in header_glob:
 
 print("Reading files completed.")
 
+# Reading utils
 html_util = open("utils/raw.html", "r")
 html_util_content = html_util.read()
 
+print("Reading utls completed.")
+
+# Saving final html file
 save_file = open("output/index.html", "w")
 save_content = ""
 
