@@ -38,10 +38,11 @@ for file in header_glob:
                 objects[iterator].cla = line[8:len(line) - 1]
 
 print("Reading files completed.")
-save_file = open("index.html", "w+")
+
+save_file = open("output/index.html", "w")
 save_content = ""
 
-html_file = "<DOCTYPE html>" \
+html_file = "<!DOCTYPE html>" \
             "<html lang='en'>" \
             "<head>" \
             "<meta charset='utf-8'>" \
