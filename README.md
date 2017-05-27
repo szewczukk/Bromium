@@ -1,7 +1,5 @@
 # documentator
 
-documentator is simple Python tool to create documentation from C/C++ headers
-=======
 is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
 ## Installation
@@ -21,6 +19,11 @@ Choose relative to this path of header files (eg. headers/)
 Choose extension of files (e.g *.hpp)
     
     $ .hpp
+
+Choose directory to catalog in witch documentator have to create HTML files
+
+    $ output/
+
 And your documentation is ready! Just look into output directory
 
 ## Pattern of comments

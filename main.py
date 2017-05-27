@@ -7,11 +7,10 @@ import object
 # Getting path of all files in directory
 dir_path = os.path.dirname(os.path.relpath(__file__))
 
-print("Give relative path of header files location (e.g headers/):")
-relative_path = input()
+relative_path = input("Give relative path of header files location (e.g headers/): ")
+extension = input("Give extension of header files (e.g .h / .hpp): ")
+output_path = input("Give path to catalog in witch create HTML documentation (e.g output/): ")
 
-print("Give extension of header files (e.g .h / .hpp):")
-extension = input()
 header_glob = glob.glob(dir_path + relative_path + "*" + extension)
 
 objects = []
@@ -47,7 +46,7 @@ html_util_content = html_util.read()
 print("Reading utls completed.")
 
 # Saving final html file
-save_file = open("output/index.html", "w")
+save_file = open(output_path + "index.html", "w")
 save_content = ""
 
 for o in objects:
