@@ -72,8 +72,8 @@ And your documentation is ready! Just look into output directory
 
 ## Comments
 * Clone this repository in catalog where is all header files or down in hierarchy
-* To change template of HTML file or modificate CSS, modify files in utils catalog
-* Don't close HTML tags in utils/raw.html file, those tags will be added in script
+* To change template of HTML file or modificate CSS, modify files in templates catalog
+* Don't close HTML tags in templates/raw.html file, those tags will be added in script
 * If you want to create documentation files in other directory, first create those (without files, catalog only)
 
 ## Licensing

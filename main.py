@@ -39,14 +39,14 @@ for file in header_glob:
 
 print("Reading files completed.")
 
-# Reading utils
-html_util = open("utils/raw.html", "r")
+# Reading templates
+html_util = open("templates/raw.html", "r")
 html_util_content = html_util.read()
 
-css_util = open("utils/styles.css", "r")
+css_util = open("templates/styles.css", "r")
 css_util_content = css_util.read()
 
-print("Reading utls completed.")
+print("Reading templates completed.")
 
 # Saving final files
 save_file = open(output_path + "index.html", "w")
