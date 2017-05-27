@@ -1,5 +1,5 @@
 # documentator
-documentator is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
+is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
 ## Installation
 Just clone this repository at your project catalog
