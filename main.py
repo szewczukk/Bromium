@@ -39,16 +39,11 @@ for file in header_glob:
 
 print("Reading files completed.")
 
+html_util = open("utils/raw.html", "r")
+html_util_content = html_util.read()
+
 save_file = open("output/index.html", "w")
 save_content = ""
-
-html_file = "<!DOCTYPE html>" \
-            "<html lang='en'>" \
-            "<head>" \
-            "<meta charset='utf-8'>" \
-            "<title>Documenator page</title>" \
-            "</head>" \
-            "<body>"
 
 for o in objects:
     save_content += "<p>\nName: " + o.nam + "<br>\n"
@@ -57,8 +52,9 @@ for o in objects:
     save_content += "Arguments: " + o.arg + "<br>\n"
     save_content += "Returning: " + o.ret + "<br>\n</p>\n"
 
-after_html_file = "</body>" \
+after_html_file = "</div>" \
+                  "</body>" \
                   "</html>"
 
-save_file.write(html_file + save_content + after_html_file)
+save_file.write(html_util_content + save_content + after_html_file)
 print("Writing html file completed.")
