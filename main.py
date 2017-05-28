@@ -67,6 +67,7 @@ for o in objects:
     save_content += "Description: " + o["description"] + "<br>\n"
     save_content += "Arguments: " + o["arguments"] + "<br>\n"
     save_content += "Returning: " + o["returns"] + "<br>\n</p>\n"
+    save_content += "<hr>"
 
 after_html_file = "</div>" \
                   "</body>" \
