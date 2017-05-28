@@ -9,7 +9,20 @@ relative_path = input("Give relative path of header files location (e.g headers/
 extension = input("Give extension of header files (e.g .h / .hpp): ")
 output_path = input("Give path to catalog in witch create HTML documentation (e.g output/): ")
 
+if relative_path[-1:] != "/":
+    relative_path += "/"
+
+if output_path[-1:] != "/":
+    output_path += "/"
+
+if extension[:0] != ".":
+    extension = "." + extension
+
 header_glob = glob.glob(dir_path + relative_path + "*" + extension)
+
+if len(header_glob) < 1:
+    print("Error! No files to documentation")
+    exit(1)
 
 objects = []
 
