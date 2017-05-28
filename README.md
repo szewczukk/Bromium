@@ -62,7 +62,7 @@ And your documentation is ready! Just look into output directory
     </tr>
     <tr>
         <td>
-            <b>Returning</b> 
+            <b>Returns</b> 
         </td>
         <td>
             [ret][Pi number as delta]
