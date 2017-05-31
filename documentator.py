@@ -24,6 +24,9 @@ if len(header_glob) < 1:
     print("Error! No files to documentation")
     exit(1)
 
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
+
 objects = []
 
 # Printing content of files
