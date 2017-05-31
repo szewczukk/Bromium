@@ -51,11 +51,11 @@ for curr_file in header_glob:
 
 print("Reading files completed.")
 
-# Reading templates
-html_util = open("templates/raw.html", "r")
+# Reading .documentator
+html_util = open(".documentator/raw.html", "r")
 html_util_content = html_util.read()
 
-css_util = open("templates/styles.css", "r")
+css_util = open(".documentator/styles.css", "r")
 css_util_content = css_util.read()
 
 print("Reading templates completed.")
