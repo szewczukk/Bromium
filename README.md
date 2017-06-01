@@ -8,9 +8,14 @@ Just clone this repository at your project catalog
     $ git clone https://github.com/bjornus/documentator
   
 ## How to  use
-Run main Python file
+Run documentator Python file
 
-    $ python main.py
+    $ python documentator.py
+
+or
+
+    $ chmod +x documentator.py
+    $ ./documentator.py
     
 Choose relative to this path of header files (eg. headers/)
     
