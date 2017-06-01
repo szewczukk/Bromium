@@ -2,6 +2,7 @@
 import glob
 import os
 import sys
+import shutil
 
 # Getting path of all files in directory
 dir_path = os.path.dirname(os.path.relpath(__file__))
@@ -80,7 +81,11 @@ css_util_content = css_util.read()
 
 print("Reading templates completed.")
 
+# Deleting all files in output
+shutil.rmtree(output_path)
+
 # Saving final files
+os.makedirs(output_path)
 save_file = open(output_path + "index.html", "w")
 save_content = ""
 
