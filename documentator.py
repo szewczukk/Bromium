@@ -12,7 +12,7 @@ output_path = ""
 
 try:
     arg = sys.argv[1]
-except BaseException:
+except IndexError:
     arg = ""
 
 if not os.path.exists(".documentator/settings.txt") or arg == "new":
