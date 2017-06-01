@@ -85,11 +85,11 @@ save_file = open(output_path + "index.html", "w")
 save_content = ""
 
 for o in objects:
-    save_content += "<p>\nName: " + o["name"] + "<br>\n"
+    save_content += "<p>Name: " + o["name"] + "<br>"
     save_content += "Class: " + o["class"] + "<br>\n"
-    save_content += "Description: " + o["description"] + "<br>\n"
-    save_content += "Arguments: " + o["arguments"] + "<br>\n"
-    save_content += "Returning: " + o["returns"] + "<br>\n</p>\n"
+    save_content += "Description: " + o["description"] + "<br>"
+    save_content += "<i>Arguments: " + o["arguments"] + "</i><br>"
+    save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
     save_content += "<hr>"
 
 after_html_file = "</div>" \
@@ -100,6 +100,26 @@ save_file.write(html_util_content + save_content + after_html_file)
 
 css_file = open(output_path + "styles.css", "w")
 css_file.write(css_util_content)
+
+# Saving methods.html
+method = open(output_path + "methods.html", "w")
+method_content = ""
+
+for o in objects:
+    method_content += "<p>" + o["name"] + "</p>"
+
+method.write(html_util_content + method_content + after_html_file)
+method.close()
+
+# Saving classes.html
+cls = open(output_path + "classes.html", "w")
+cls_content = ""
+
+for o in objects:
+    cls_content += "<p>" + o["class"] + "</p>"
+
+cls.write(html_util_content + cls_content + after_html_file)
+cls.close()
 
 print("Writing html file completed.")
 
