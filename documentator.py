@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import glob
 import os
+import sys
 
 # Getting path of all files in directory
 dir_path = os.path.dirname(os.path.relpath(__file__))
@@ -9,7 +10,12 @@ relative_path = ""
 extension = ""
 output_path = ""
 
-if not os.path.exists(".documentator/settings.txt"):
+try:
+    arg = sys.argv[1]
+except BaseException:
+    arg = ""
+
+if not os.path.exists(".documentator/settings.txt") or arg == "new":
     relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
     extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
     output_path = raw_input("Give path to catalog in witch create HTML documentation (e.g output/): ")
@@ -25,12 +31,12 @@ if not os.path.exists(".documentator/settings.txt"):
 else:
     settings_file = open(".documentator/settings.txt", "r").read().splitlines()
     for line in settings_file:
-        if relative_path == "":
-            relative_path = line
-        elif extension == "":
-            extension = line
-        elif output_path == "":
-            output_path = line
+        if line[:3] == "rel":
+            relative_path = line[4:]
+        elif line[:3] == "ext":
+            extension = line[4:]
+        elif line[:3] == "out":
+            output_path = line[4:]
 
 header_glob = glob.glob(dir_path + relative_path + "*" + extension)
 
@@ -97,7 +103,7 @@ css_file.write(css_util_content)
 
 print("Writing html file completed.")
 
-if not os.path.exists(".documentator/settings.txt"):
+if not os.path.exists(".documentator/settings.txt") or arg == "new":
     settings_file = open(".documentator/settings.txt", "w")
-    settings_file.write(relative_path + "\n" + extension + "\n" + output_path)
+    settings_file.write("rel " + relative_path + "\n" + "ext " + extension + "\n" + "out " + output_path)
     settings_file.close()
