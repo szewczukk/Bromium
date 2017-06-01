@@ -5,18 +5,32 @@ import os
 # Getting path of all files in directory
 dir_path = os.path.dirname(os.path.relpath(__file__))
 
-relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
-extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
-output_path = raw_input("Give path to catalog in witch create HTML documentation (e.g output/): ")
+relative_path = ""
+extension = ""
+output_path = ""
 
-if relative_path[-1:] != "/":
-    relative_path += "/"
+if not os.path.exists(".documentator/settings.txt"):
+    relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
+    extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
+    output_path = raw_input("Give path to catalog in witch create HTML documentation (e.g output/): ")
 
-if output_path[-1:] != "/":
-    output_path += "/"
+    if relative_path[-1:] != "/":
+        relative_path += "/"
 
-if extension[:0] != ".":
-    extension = "." + extension
+    if output_path[-1:] != "/":
+        output_path += "/"
+
+    if extension[:0] != ".":
+        extension = "." + extension
+else:
+    settings_file = open(".documentator/settings.txt", "r").read().splitlines()
+    for line in settings_file:
+        if relative_path == "":
+            relative_path = line
+        elif extension == "":
+            extension = line
+        elif output_path == "":
+            output_path = line
 
 header_glob = glob.glob(dir_path + relative_path + "*" + extension)
 
@@ -82,3 +96,8 @@ css_file = open(output_path + "styles.css", "w")
 css_file.write(css_util_content)
 
 print("Writing html file completed.")
+
+if not os.path.exists(".documentator/settings.txt"):
+    settings_file = open(".documentator/settings.txt", "w")
+    settings_file.write(relative_path + "\n" + extension + "\n" + output_path)
+    settings_file.close()
