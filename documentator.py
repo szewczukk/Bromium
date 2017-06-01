@@ -101,12 +101,26 @@ save_file.write(html_util_content + save_content + after_html_file)
 css_file = open(output_path + "styles.css", "w")
 css_file.write(css_util_content)
 
+# Independent file for one method
+for o in objects:
+    independent_file_for_method = open(output_path + o["name"] + ".html", "w")
+    to_save = ""
+    to_save += "<p>Name: " + o["name"] + "<br>"
+    to_save += "Class: " + o["class"] + "<br>\n"
+    to_save += "Description: " + o["description"] + "<br>"
+    to_save += "<i>Arguments: " + o["arguments"] + "</i><br>"
+    to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
+    independent_file_for_method.write(html_util_content + to_save + after_html_file)
+    independent_file_for_method.close()
+
+#TODO: Independent file for one class
+
 # Saving methods.html
 method = open(output_path + "methods.html", "w")
 method_content = ""
 
 for o in objects:
-    method_content += "<p>" + o["name"] + "</p>"
+    method_content += "<p><a href='" + o["name"] + ".html'>" + o["class"] + "</a></p>"
 
 method.write(html_util_content + method_content + after_html_file)
 method.close()
@@ -116,7 +130,7 @@ cls = open(output_path + "classes.html", "w")
 cls_content = ""
 
 for o in objects:
-    cls_content += "<p>" + o["class"] + "</p>"
+    cls_content += "<p><a href='" + o["class"] + ".html'>" + o["class"] + "</a></p>"
 
 cls.write(html_util_content + cls_content + after_html_file)
 cls.close()
