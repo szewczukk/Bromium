@@ -4,6 +4,7 @@ import os
 import sys
 import shutil
 
+
 # Getting path of all files in directory
 dir_path = os.path.dirname(os.path.relpath(__file__))
 
@@ -91,7 +92,7 @@ save_content = ""
 
 for o in objects:
     save_content += "<p>Name: " + o["name"] + "<br>"
-    save_content += "Class: " + o["class"] + "<br>\n"
+    save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
     save_content += "Description: " + o["description"] + "<br>"
     save_content += "<i>Arguments: " + o["arguments"] + "</i><br>"
     save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
@@ -118,7 +119,21 @@ for o in objects:
     independent_file_for_method.write(html_util_content + to_save + after_html_file)
     independent_file_for_method.close()
 
-#TODO: Independent file for one class
+# Saving classes
+classes = []
+for o in objects:
+    classes += o["class"]
+
+classes = list(set(classes))
+
+class_file = open(output_path + "classes.html", "w")
+class_file_content = ""
+
+for c in classes:
+    class_file_content += "<p><a>" + c + "</a></p>"
+
+class_file.write(html_util_content + class_file_content + after_html_file)
+class_file.close()
 
 # Saving methods.html
 method = open(output_path + "methods.html", "w")
@@ -129,16 +144,6 @@ for o in objects:
 
 method.write(html_util_content + method_content + after_html_file)
 method.close()
-
-# Saving classes.html
-cls = open(output_path + "classes.html", "w")
-cls_content = ""
-
-for o in objects:
-    cls_content += "<p><a href='" + o["class"] + ".html'>" + o["class"] + "</a></p>"
-
-cls.write(html_util_content + cls_content + after_html_file)
-cls.close()
 
 print("Writing html file completed.")
 
