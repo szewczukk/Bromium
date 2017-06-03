@@ -3,7 +3,7 @@
 is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
 ## Example of documentator comments in C++
-'''cpp
+```cpp
     class foobar
     {
         //[nam][isEqual]
@@ -25,7 +25,7 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
             return bar + bar2;
         }
     }
-'''
+```
 
 ## Installation
 Just clone this repository at your project catalog
