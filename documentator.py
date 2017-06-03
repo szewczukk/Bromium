@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import sys
-
 try:
-    arg = sys.argv[1]
+    from sys import argv
+
+    arg = argv[1]
 except IndexError:
     arg = ""
 
@@ -21,9 +21,6 @@ else:
     # Getting path of all files in directory
     dir_path = path.dirname(path.relpath(__file__))
 
-    relative_path = ""
-    extension = ""
-    output_path = ""
     if not path.exists(".documentator/settings.txt") or arg == "new":
         relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
         extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
@@ -111,8 +108,7 @@ else:
     # Independent file for one method
     for o in objects:
         independent_file_for_method = open(output_path + o["name"] + ".html", "w")
-        to_save = ""
-        to_save += "<p>Name: " + o["name"] + "<br>"
+        to_save = "<p>Name: " + o["name"] + "<br>"
         to_save += "Class: " + o["class"] + "<br>\n"
         to_save += "Description: " + o["description"] + "<br>"
         to_save += "<i>Arguments: " + o["arguments"] + "</i><br>"
