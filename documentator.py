@@ -120,17 +120,11 @@ for o in objects:
     independent_file_for_method.close()
 
 # Saving classes
-classes = []
-for o in objects:
-    classes += o["class"]
-
-classes = list(set(classes))
-
 class_file = open(output_path + "classes.html", "w")
 class_file_content = ""
 
-for c in classes:
-    class_file_content += "<p><a>" + c + "</a></p>"
+for o in objects:
+    class_file_content += "<p><a href='" + o["class"] +".html'>" + o["class"] + "</a></p>"
 
 class_file.write(html_util_content + class_file_content + after_html_file)
 class_file.close()
