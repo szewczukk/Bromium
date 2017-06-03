@@ -132,7 +132,7 @@ else:
     method_content = ""
 
     for o in objects:
-        method_content += "<p><a href='" + o["name"] + ".html'>" + o["class"] + "</a></p>"
+        method_content += "<p><a href='" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
 
     method.write(before_html + method_content + after_html)
     method.close()
