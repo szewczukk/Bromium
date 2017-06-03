@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<templates>
+    <!---
+        HTML in CDATA is the HTML that renders before added content
+    -->
+    <before_html>
+        <![CDATA[
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Title</title>
+
+                <link rel="stylesheet" href="styles.css">
+            </head>
+            <body>
+                <div id="wrapper">
+                    <div style="text-align:center">
+                        <div style="display:inline-block">
+                            <a href="methods.html">All methods</a>
+                        </div>
+                        &nbsp;|&nbsp;
+                        <div style="display:inline-block">
+                            <a href="index.html">Index</a>
+                        </div>
+                        &nbsp;|&nbsp;
+                        <div style="display:inline-block">
+                            <a href="classes.html">All Classes</a>
+                        </div>
+                    </div>
+        ]]>
+    </before_html>
+    <!---
+        HTML in CDATA is the HTML that renders after added content
+    -->
+    <after_html>
+        <![CDATA[
+                </div>
+            </body>
+        </html>
+        ]]>
+    </after_html>
+    <!---
+        CSS of web page
+    -->
+    <stylesheet>
+        <![CDATA[
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        #wrapper {
+            width:1000px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        ]]>
+    </stylesheet>
+</templates>

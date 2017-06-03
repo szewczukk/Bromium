@@ -4,6 +4,8 @@ import os
 import sys
 import shutil
 
+from xml.etree import ElementTree
+
 
 # Getting path of all files in directory
 dir_path = os.path.dirname(os.path.relpath(__file__))
@@ -49,9 +51,16 @@ if len(header_glob) < 1:
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 
-objects = []
+# Getting templates from XML
+tree = ElementTree.parse(".documentator/templates.xml")
+before_html = tree.find('before_html').text
+after_html = tree.find('after_html').text
+stylesheet = tree.find('stylesheet').text
+
+print("Reading templates completed.")
 
 # Printing content of files
+objects = []
 for curr_file in header_glob:
     f = open(curr_file, 'r').read().splitlines()
     for line in f:
@@ -73,15 +82,6 @@ for curr_file in header_glob:
 
 print("Reading files completed.")
 
-# Reading .documentator
-html_util = open(".documentator/raw.html", "r")
-html_util_content = html_util.read()
-
-css_util = open(".documentator/styles.css", "r")
-css_util_content = css_util.read()
-
-print("Reading templates completed.")
-
 # Deleting all files in output
 shutil.rmtree(output_path)
 
@@ -98,14 +98,10 @@ for o in objects:
     save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
     save_content += "<hr>"
 
-after_html_file = "</div>" \
-                  "</body>" \
-                  "</html>"
-
-save_file.write(html_util_content + save_content + after_html_file)
+save_file.write(before_html + save_content + after_html)
 
 css_file = open(output_path + "styles.css", "w")
-css_file.write(css_util_content)
+css_file.write(stylesheet)
 
 # Independent file for one method
 for o in objects:
@@ -116,7 +112,7 @@ for o in objects:
     to_save += "Description: " + o["description"] + "<br>"
     to_save += "<i>Arguments: " + o["arguments"] + "</i><br>"
     to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
-    independent_file_for_method.write(html_util_content + to_save + after_html_file)
+    independent_file_for_method.write(before_html + to_save + after_html)
     independent_file_for_method.close()
 
 # Saving classes
@@ -126,7 +122,7 @@ class_file_content = ""
 for o in objects:
     class_file_content += "<p><a href='" + o["class"] +".html'>" + o["class"] + "</a></p>"
 
-class_file.write(html_util_content + class_file_content + after_html_file)
+class_file.write(before_html + class_file_content + after_html)
 class_file.close()
 
 # Saving methods.html
@@ -136,7 +132,7 @@ method_content = ""
 for o in objects:
     method_content += "<p><a href='" + o["name"] + ".html'>" + o["class"] + "</a></p>"
 
-method.write(html_util_content + method_content + after_html_file)
+method.write(before_html + method_content + after_html)
 method.close()
 
 print("Writing html file completed.")
