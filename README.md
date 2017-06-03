@@ -102,8 +102,8 @@ And your documentation is ready! Just look into output directory
 
 ## Comments
 * Clone this repository in catalog where is all header files or down in hierarchy
-* To change template of HTML file or modificate CSS, modify files in .documentator catalog
-* Don't close HTML tags in .documentator/raw.html file, those tags will be added in script
+* To change template of HTML file or modificate CSS, modify templates.xml in .documentator catalog
+* Don't close HTML tags in .documentator/templates.xml file, those tags will be added in script
 * If you want to create documentation comments in C/C++ file, use ALL of available comment types (table on top of README)
 * To set new settings without deleting settings file, add "new" argument when you call documentator.py file (python documentator.py new)
 
