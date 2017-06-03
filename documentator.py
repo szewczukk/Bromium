@@ -1,17 +1,6 @@
 #!/usr/bin/env python
-import glob
-import os
+
 import sys
-import shutil
-
-from xml.etree import ElementTree
-
-# Getting path of all files in directory
-dir_path = os.path.dirname(os.path.relpath(__file__))
-
-relative_path = ""
-extension = ""
-output_path = ""
 
 try:
     arg = sys.argv[1]
@@ -19,8 +8,21 @@ except IndexError:
     arg = ""
 
 if arg == "modify":
+    import os
     os.system("gedit .documentator/templates.xml")
 else:
+    import glob
+    import os
+    import shutil
+
+    from xml.etree import ElementTree
+
+    # Getting path of all files in directory
+    dir_path = os.path.dirname(os.path.relpath(__file__))
+
+    relative_path = ""
+    extension = ""
+    output_path = ""
     if not os.path.exists(".documentator/settings.txt") or arg == "new":
         relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
         extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
