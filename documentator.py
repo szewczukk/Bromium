@@ -8,22 +8,23 @@ except IndexError:
     arg = ""
 
 if arg == "modify":
-    import os
-    os.system("gedit .documentator/templates.xml")
-else:
-    import glob
-    import os
-    import shutil
+    from os import system
 
+    system("gedit .documentator/templates.xml")
+else:
     from xml.etree import ElementTree
+    from shutil import rmtree
+    from os import makedirs
+    from glob import glob
+    from os import path
 
     # Getting path of all files in directory
-    dir_path = os.path.dirname(os.path.relpath(__file__))
+    dir_path = path.dirname(path.relpath(__file__))
 
     relative_path = ""
     extension = ""
     output_path = ""
-    if not os.path.exists(".documentator/settings.txt") or arg == "new":
+    if not path.exists(".documentator/settings.txt") or arg == "new":
         relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
         extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
         output_path = raw_input("Give path to catalog in witch create HTML documentation (e.g output/): ")
@@ -46,14 +47,14 @@ else:
             elif line[:3] == "out":
                 output_path = line[4:]
 
-    header_glob = glob.glob(dir_path + relative_path + "*" + extension)
+    header_glob = glob(dir_path + relative_path + "*" + extension)
 
     if len(header_glob) < 1:
         print("Error! No files to documentation")
         exit(1)
 
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
+    if not path.exists(output_path):
+        makedirs(output_path)
 
     # Getting templates from XML
     tree = ElementTree.parse(".documentator/templates.xml")
@@ -87,10 +88,10 @@ else:
     print("Reading files completed.")
 
     # Deleting all files in output
-    shutil.rmtree(output_path)
+    rmtree(output_path)
 
     # Saving final files
-    os.makedirs(output_path)
+    makedirs(output_path)
     save_file = open(output_path + "index.html", "w")
     save_content = ""
 
@@ -141,7 +142,7 @@ else:
 
     print("Writing html file completed.")
 
-    if not os.path.exists(".documentator/settings.txt") or arg == "new":
+    if not path.exists(".documentator/settings.txt") or arg == "new":
         settings_file = open(".documentator/settings.txt", "w")
         settings_file.write("rel " + relative_path + "\n" + "ext " + extension + "\n" + "out " + output_path)
         settings_file.close()
