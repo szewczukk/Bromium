@@ -97,7 +97,7 @@ def logic(arg):
 
     # Independent file for one method
     for o in objects:
-        independent_file_for_method = open(output_path + o["name"] + ".html", "w")
+        independent_file_for_method = open(output_path + o["class"] + "_" +  o["name"] + ".html", "w")
         to_save = "<p>Name: " + o["name"] + "<br>"
         to_save += "Class: " + o["class"] + "<br>\n"
         to_save += "Description: " + o["description"] + "<br>"
