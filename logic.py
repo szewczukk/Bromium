@@ -119,7 +119,7 @@ def logic(arg):
         to_save = "<h2>" + c + "</h2>"
         for o in objects:
             if o["class"] == c:
-                to_save += "<p><a href = '" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+                to_save += "<p><a href = '" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
         independent_file_for_class.write(before_html + to_save + after_html)
         independent_file_for_class.close()
 
@@ -138,7 +138,7 @@ def logic(arg):
     method_content = "<h2>All methods in the project: </h2>"
 
     for o in objects:
-        method_content += "<p><a href='" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+        method_content += "<p><a href='" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
 
     method.write(before_html + method_content + after_html)
     method.close()
