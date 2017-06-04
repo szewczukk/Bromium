@@ -77,14 +77,17 @@ def logic(arg):
     # Saving final files
     makedirs(output_path)
     save_file = open(output_path + "index.html", "w")
-    save_content = ""
+    save_content = "<h2>All methods with details in the project:</h2>"
 
     for o in objects:
         save_content += "<p>Name: " + o["name"] + "<br>"
         save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
-        save_content += "Description: " + o["description"] + "<br>"
-        save_content += "<i>Arguments: " + o["arguments"] + "</i><br>"
-        save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
+        if o["description"] != "":
+            save_content += "Description: " + o["description"] + "<br>"
+        if o["arguments"] != "":
+            save_content += "<i>Arguments: " + o["arguments"] + "</i><br>"
+        if o["returns"] != "":
+            save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
         save_content += "<hr>"
 
     save_file.write(before_html + save_content + after_html)
@@ -103,19 +106,35 @@ def logic(arg):
         independent_file_for_method.write(before_html + to_save + after_html)
         independent_file_for_method.close()
 
+    # Independent files for one class
+    classes = []
+    for o in objects:
+        classes.append(o["class"])
+
+    classes = list(set(classes))
+
+    for c in classes:
+        independent_file_for_class = open(output_path + c + ".html", "w")
+        to_save = "<h2>" + c +"</h2>"
+        for o in objects:
+            if o["class"] == c:
+                to_save += "<p><a href = '" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+        independent_file_for_class.write(before_html + to_save + after_html)
+        independent_file_for_class.close()
+
     # Saving classes
     class_file = open(output_path + "classes.html", "w")
-    class_file_content = ""
+    class_file_content = "<h2>All classes in the project:</h2>"
 
-    for o in objects:
-        class_file_content += "<p><a href='" + o["class"] +".html'>" + o["class"] + "</a></p>"
+    for c in classes:
+        class_file_content += "<p><a href='" + c +".html'>" + c + "</a></p>"
 
     class_file.write(before_html + class_file_content + after_html)
     class_file.close()
 
     # Saving methods.html
     method = open(output_path + "methods.html", "w")
-    method_content = ""
+    method_content = "<h2>All methods in the project: </h2>"
 
     for o in objects:
         method_content += "<p><a href='" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
