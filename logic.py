@@ -4,6 +4,7 @@ from os import makedirs
 from glob import glob
 from os import path
 
+
 def logic(arg):
     # Getting path of all files in directory
     dir_path = path.dirname(path.relpath(__file__))
@@ -115,7 +116,7 @@ def logic(arg):
 
     for c in classes:
         independent_file_for_class = open(output_path + c + ".html", "w")
-        to_save = "<h2>" + c +"</h2>"
+        to_save = "<h2>" + c + "</h2>"
         for o in objects:
             if o["class"] == c:
                 to_save += "<p><a href = '" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
@@ -127,7 +128,7 @@ def logic(arg):
     class_file_content = "<h2>All classes in the project:</h2>"
 
     for c in classes:
-        class_file_content += "<p><a href='" + c +".html'>" + c + "</a></p>"
+        class_file_content += "<p><a href='" + c + ".html'>" + c + "</a></p>"
 
     class_file.write(before_html + class_file_content + after_html)
     class_file.close()

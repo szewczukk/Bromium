@@ -106,6 +106,7 @@ And your documentation is ready! Just look into output directory
 * Don't close HTML tags in .documentator/templates.xml file, those tags will be added in script
 * If you want to create documentation comments in C/C++ file, use ALL of available comment types (table on top of README)
 * To set new settings without deleting settings file, add "new" argument when you call documentator.py file (python documentator.py new)
+* To modify page templates, add argument "modify" to calling documentator.py file
 
 ## Licensing
 To see the license of documentator, open <a href="https://github.com/bjornus/documentator/blob/master/LICENSE" target="_blank">LICENSE</a> file.
