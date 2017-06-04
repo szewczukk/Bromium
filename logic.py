@@ -1,10 +1,10 @@
-def logic(arg):
-    from xml.etree import ElementTree
-    from shutil import rmtree
-    from os import makedirs
-    from glob import glob
-    from os import path
+from xml.etree import ElementTree
+from shutil import rmtree
+from os import makedirs
+from glob import glob
+from os import path
 
+def logic(arg):
     # Getting path of all files in directory
     dir_path = path.dirname(path.relpath(__file__))
 
