@@ -66,13 +66,16 @@ def logic(arg):
 
                 content = line[content_start:content_end]
 
+                # If name comment was detect
                 if operator == "nam":
                     objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": "", "line": ""})
                     objects[len(objects) - 1]["name"] = content
 
+                # If description comment was detect
                 if operator == "dec":
                     objects[len(objects) - 1]["description"] = content
 
+                # If argument comment was detect
                 if operator == "arg":
                     argument = {"name": "", "description": ""}
                     start = line.index("<")
@@ -81,9 +84,11 @@ def logic(arg):
                     argument["description"] = content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
                     objects[len(objects) - 1]["arguments"].append(argument)
 
+                # If returning comment was detect
                 if operator == "ret":
                     objects[len(objects) - 1]["returns"] = content
 
+                # If class comment was detect
                 if operator == "cla":
                     objects[len(objects) - 1]["class"] = content
             if line.count("//header") > 0:
@@ -94,7 +99,7 @@ def logic(arg):
     # Deleting all files in output
     rmtree(output_path)
 
-    # Saving final files
+    # Saving index.html
     makedirs(output_path)
     save_file = open(output_path + "index.html", "w")
     save_content = "<h2>All methods with details in the project:</h2>"
@@ -147,7 +152,7 @@ def logic(arg):
         independent_file_for_class.write(before_html + to_save + after_html)
         independent_file_for_class.close()
 
-    # Saving classes
+    # Saving classes.html
     class_file = open(output_path + "classes.html", "w")
     class_file_content = "<h2>All classes in the project:</h2>"
 
