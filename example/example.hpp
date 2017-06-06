@@ -1,6 +1,5 @@
 class foobar
 {
-header
     /*
         ^[name][isEqual]
         ^[class][foobar]
@@ -13,4 +12,4 @@ header
     {
         return bar == bar2 ? true : false;
     }
-}
+};

@@ -28,7 +28,7 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
         {
             return bar + bar2;
         }
-    }
+    };
 ```
 
 ## Installation
