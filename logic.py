@@ -56,7 +56,7 @@ def logic(arg):
         for line in f:
             line = line.strip()
 
-            if line[:2] == "//":
+            if line.startswith("//"):
                 operator = line[2:7]
                 content = line[8:len(line) - 1]
             else:
@@ -64,12 +64,17 @@ def logic(arg):
                 content = line[6:len(line) - 1]
 
             if operator == "[nam]":
-                objects.append({"name": "", "description": "", "arguments": "", "returns": "", "class": ""})
+                objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": ""})
                 objects[len(objects) - 1]["name"] = content
             if operator == "[des]":
                 objects[len(objects) - 1]["description"] = content
             if operator == "[arg]":
-                objects[len(objects) - 1]["arguments"] = content
+                argument = {"name": "", "description": ""}
+                start = line.find("<")
+                end = line.find(">")
+                argument["name"] = line[start:end].replace("<", "").replace(">", "")
+                argument["description"] = content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
+                objects[len(objects) - 1]["arguments"].append(argument)
             if operator == "[ret]":
                 objects[len(objects) - 1]["returns"] = content
             if operator == "[cla]":
@@ -90,8 +95,9 @@ def logic(arg):
         save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
         if o["description"] != "":
             save_content += "Description: " + o["description"] + "<br>"
-        if o["arguments"] != "":
-            save_content += "<i>Arguments: " + o["arguments"] + "</i><br>"
+        if len(o["arguments"]) > 0:
+            for argument in o["arguments"]:
+                save_content += "<i>Argument: " + argument["name"] + " - " + argument["description"] + "</i><br>"
         if o["returns"] != "":
             save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
         save_content += "<hr>"
@@ -107,7 +113,9 @@ def logic(arg):
         to_save = "<p>Name: " + o["name"] + "<br>"
         to_save += "Class: <a href='" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
         to_save += "Description: " + o["description"] + "<br>"
-        to_save += "<i>Arguments: " + o["arguments"] + "</i><br>"
+        if len(o["arguments"]) > 0:
+            for a in o["arguments"]:
+                to_save += "<i>Arguments: " + a["name"] + " - " + a["description"] + "</i><br>"
         to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
         independent_file_for_method.write(before_html + to_save + after_html)
         independent_file_for_method.close()
