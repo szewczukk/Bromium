@@ -2,12 +2,12 @@ class foobar
 {
 header
     /*
-        ^[nam][isEqual]
-        ^[cla][foobar]
-        ^[des][Returns true if first bar is equal to second bar]
-        ^[arg]<bar>[First bar]
-        ^[arg]<bar2>[Second bar]
-        ^[ret][bool when first bar is equal to second]
+        ^[name][isEqual]
+        ^[class][foobar]
+        ^[description][Returns true if first bar is equal to second bar]
+        ^[argument]<bar>[First bar]
+        ^[argument]<bar2>[Second bar]
+        ^[returns][bool when first bar is equal to second]
     */
     bool isEqual(int bar, int bar2) //header
     {

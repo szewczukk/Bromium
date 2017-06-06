@@ -67,16 +67,16 @@ def logic(arg):
                 content = line[content_start:content_end]
 
                 # If name comment was detect
-                if operator == "nam":
+                if operator == "nam" or operator == "name":
                     objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": "", "line": ""})
                     objects[len(objects) - 1]["name"] = content
 
                 # If description comment was detect
-                if operator == "dec":
+                if operator == "dec" or operator == "description":
                     objects[len(objects) - 1]["description"] = content
 
                 # If argument comment was detect
-                if operator == "arg":
+                if operator == "arg" or operator == "argument":
                     argument = {"name": "", "description": ""}
                     start = line.index("<")
                     end = line.index(">")
@@ -85,11 +85,11 @@ def logic(arg):
                     objects[len(objects) - 1]["arguments"].append(argument)
 
                 # If returning comment was detect
-                if operator == "ret":
+                if operator == "ret" or operator == "returns":
                     objects[len(objects) - 1]["returns"] = content
 
                 # If class comment was detect
-                if operator == "cla":
+                if operator == "cla" or operator == "class":
                     objects[len(objects) - 1]["class"] = content
             if line.count("//header") > 0:
                 objects[len(objects) - 1]["line"] = line.replace("//header", "")
