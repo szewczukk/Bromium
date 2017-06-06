@@ -55,30 +55,33 @@ def logic(arg):
         f = open(curr_file, 'r').read().splitlines()
         for line in f:
             line = line.strip()
+            if line[:1] == "^":
+                operator_start = line.index("[") + 1
+                operator_end = line.index("]")
 
-            if line.startswith("//"):
-                operator = line[2:7]
-                content = line[8:len(line) - 1]
-            else:
-                operator = line[:5]
-                content = line[6:len(line) - 1]
+                operator = line[operator_start:operator_end]
 
-            if operator == "[nam]":
-                objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": ""})
-                objects[len(objects) - 1]["name"] = content
-            if operator == "[des]":
-                objects[len(objects) - 1]["description"] = content
-            if operator == "[arg]":
-                argument = {"name": "", "description": ""}
-                start = line.find("<")
-                end = line.find(">")
-                argument["name"] = line[start:end].replace("<", "").replace(">", "")
-                argument["description"] = content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
-                objects[len(objects) - 1]["arguments"].append(argument)
-            if operator == "[ret]":
-                objects[len(objects) - 1]["returns"] = content
-            if operator == "[cla]":
-                objects[len(objects) - 1]["class"] = content
+                content_start = line.rindex("[") + 1
+                content_end = line.rindex("]")
+
+                content = line[content_start:content_end]
+
+                if operator == "nam":
+                    objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": ""})
+                    objects[len(objects) - 1]["name"] = content
+                if operator == "dec":
+                    objects[len(objects) - 1]["description"] = content
+                if operator == "arg":
+                    argument = {"name": "", "description": ""}
+                    start = line.index("<")
+                    end = line.index(">")
+                    argument["name"] = line[start:end].replace("<", "").replace(">", "")
+                    argument["description"] = content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
+                    objects[len(objects) - 1]["arguments"].append(argument)
+                if operator == "ret":
+                    objects[len(objects) - 1]["returns"] = content
+                if operator == "cla":
+                    objects[len(objects) - 1]["class"] = content
 
     print("Reading files completed.")
 
