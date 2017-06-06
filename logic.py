@@ -91,8 +91,8 @@ def logic(arg):
                 # If class comment was detect
                 if operator == "cla" or operator == "class":
                     objects[len(objects) - 1]["class"] = content
-            if line.count("//header") > 0:
-                objects[len(objects) - 1]["line"] = line.replace("//header", "")
+            if line.count("//^header") > 0:
+                objects[len(objects) - 1]["line"] = line.replace("//^header", "")
 
     print("Reading files completed.")
 
