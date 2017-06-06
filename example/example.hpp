@@ -16,7 +16,8 @@ class foobar
         ^[nam][sum]
         ^[cla][foobar]
         ^[des][Returns sum of bar and bar2]
-        ^[arg]<bar>[bar - first bar ; bar2 - second bar]
+        ^[arg]<bar>[First bar]
+        ^[arg]<bar2>[Second bar]
         ^[ret][sum of both bars in integer type]
     */
     int sum(int bar, int bar2)
