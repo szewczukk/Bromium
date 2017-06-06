@@ -67,7 +67,7 @@ And your documentation is ready! Just look into output directory
             <b>Name of method</b> 
         </td>
         <td>
-            [nam][calcPi]
+            [nam][name of method]
         </td>
    </tr>
    <tr>
@@ -75,7 +75,7 @@ And your documentation is ready! Just look into output directory
             <b>Name of class where method is</b> 
         </td>
         <td>
-            [cla][MathClass]
+            [cla][Name]
         </td>
     </tr>
     <tr>
@@ -83,7 +83,7 @@ And your documentation is ready! Just look into output directory
            <b>Description</b> 
         </td>
         <td>
-            [des][Calculating Pi number]
+            [des][description fo method]
         </td>
      </tr>
      <tr>
@@ -91,7 +91,7 @@ And your documentation is ready! Just look into output directory
             <b>Arguments</b> 
         </td>
         <td>
-            [arg][a - First argument ; b - Second argument]
+            [arg]<name>[description of argument]
         </td>
     </tr>
     <tr>
@@ -99,7 +99,7 @@ And your documentation is ready! Just look into output directory
             <b>Returns</b> 
         </td>
         <td>
-            [ret][Pi number as delta]
+            [ret][description of returning value]
         </td>
     </tr>
 </table>
