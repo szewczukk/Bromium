@@ -91,7 +91,7 @@ And your documentation is ready! Just look into output directory
             <b>Arguments</b> 
         </td>
         <td>
-            [arg]<name>[description of argument]
+            [arg]/<name/>[description of argument]
         </td>
     </tr>
     <tr>
