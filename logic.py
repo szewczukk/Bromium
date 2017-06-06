@@ -55,20 +55,25 @@ def logic(arg):
         f = open(curr_file, 'r').read().splitlines()
         for line in f:
             line = line.strip()
+
             if line[:2] == "//":
                 operator = line[2:7]
                 content = line[8:len(line) - 1]
-                if operator == "[nam]":
-                    objects.append({"name": "", "description": "", "arguments": "", "returns": "", "class": ""})
-                    objects[len(objects) - 1]["name"] = content
-                if operator == "[des]":
-                    objects[len(objects) - 1]["description"] = content
-                if operator == "[arg]":
-                    objects[len(objects) - 1]["arguments"] = content
-                if operator == "[ret]":
-                    objects[len(objects) - 1]["returns"] = content
-                if operator == "[cla]":
-                    objects[len(objects) - 1]["class"] = content
+            else:
+                operator = line[:5]
+                content = line[6:len(line) - 1]
+
+            if operator == "[nam]":
+                objects.append({"name": "", "description": "", "arguments": "", "returns": "", "class": ""})
+                objects[len(objects) - 1]["name"] = content
+            if operator == "[des]":
+                objects[len(objects) - 1]["description"] = content
+            if operator == "[arg]":
+                objects[len(objects) - 1]["arguments"] = content
+            if operator == "[ret]":
+                objects[len(objects) - 1]["returns"] = content
+            if operator == "[cla]":
+                objects[len(objects) - 1]["class"] = content
 
     print("Reading files completed.")
 
