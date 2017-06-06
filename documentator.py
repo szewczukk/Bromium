@@ -13,13 +13,6 @@ if arg == "modify":
 
     system("gedit .documentator/templates.xml")
 
-# If argument "author was given"
-elif arg == "author":
-    from os import system
-
-    print ("Author of documentator is Dmitro Szewczuk")
-    system("open https://bjornus.github.io")
-
 # If there is no detectable argument
 else:
     from logic import logic
