@@ -14,7 +14,7 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
             ^[arg]<bar2>[Second bar]
             ^[ret][bool when first bar is equal to second]
         */
-        bool isEqual(int bar, int bar2)
+        bool isEqual(int bar, int bar2) //header
         {
             return bar == bar2 ? true : false;
         }
@@ -24,7 +24,7 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
         //^[arg]<bar>[First bar]
         //^[arg]<bar2>[Second bar]
         //^[ret][sum of both bars in integer type]
-        int sum(int bar, int bar2)
+        int sum(int bar, int bar2) //header
         {
             return bar + bar2;
         }
@@ -106,6 +106,7 @@ And your documentation is ready! Just look into output directory
 
 ## Comments
 * All documentator comments start with ^ symbol
+* Add comment //headers after headers of method
 * Clone this repository in catalog where is all header files or down in hierarchy
 * To change template of HTML file or modificate CSS, modify templates.xml in .documentator catalog
 * Don't close HTML tags in .documentator/templates.xml file, those tags will be added in script

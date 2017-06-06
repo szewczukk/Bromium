@@ -59,6 +59,9 @@
         a {
             color: inherit;
         }
+        .code {
+            background-color:lightblue;
+        }
         ]]>
     </stylesheet>
 </templates>

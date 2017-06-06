@@ -1,5 +1,6 @@
 class foobar
 {
+header
     /*
         ^[nam][isEqual]
         ^[cla][foobar]
@@ -8,7 +9,7 @@ class foobar
         ^[arg]<bar2>[Second bar]
         ^[ret][bool when first bar is equal to second]
     */
-    bool isEqual(int bar, int bar2)
+    bool isEqual(int bar, int bar2) //header
     {
         return bar == bar2 ? true : false;
     }
@@ -20,7 +21,7 @@ class foobar
         ^[arg]<bar2>[Second bar]
         ^[ret][sum of both bars in integer type]
     */
-    int sum(int bar, int bar2)
+    int sum(int bar, int bar2) //header
     {
         return bar + bar2;
     }

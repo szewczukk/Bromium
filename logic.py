@@ -67,10 +67,12 @@ def logic(arg):
                 content = line[content_start:content_end]
 
                 if operator == "nam":
-                    objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": ""})
+                    objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": "", "line": ""})
                     objects[len(objects) - 1]["name"] = content
+
                 if operator == "dec":
                     objects[len(objects) - 1]["description"] = content
+
                 if operator == "arg":
                     argument = {"name": "", "description": ""}
                     start = line.index("<")
@@ -78,10 +80,14 @@ def logic(arg):
                     argument["name"] = line[start:end].replace("<", "").replace(">", "")
                     argument["description"] = content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
                     objects[len(objects) - 1]["arguments"].append(argument)
+
                 if operator == "ret":
                     objects[len(objects) - 1]["returns"] = content
+
                 if operator == "cla":
                     objects[len(objects) - 1]["class"] = content
+            if line.count("//header") > 0:
+                objects[len(objects) - 1]["line"] = line.replace("//header", "")
 
     print("Reading files completed.")
 
@@ -94,7 +100,8 @@ def logic(arg):
     save_content = "<h2>All methods with details in the project:</h2>"
 
     for o in objects:
-        save_content += "<p>Name: " + o["name"] + "<br>"
+        save_content += "<br><p><i><div class='code'>" + o["line"] + "</div></i><br>"
+        save_content += "Name: " + o["name"] + "<br>"
         save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
         if o["description"] != "":
             save_content += "Description: " + o["description"] + "<br>"
@@ -113,7 +120,8 @@ def logic(arg):
     # Independent file for one method
     for o in objects:
         independent_file_for_method = open(output_path + o["class"] + "_" +  o["name"] + ".html", "w")
-        to_save = "<p>Name: " + o["name"] + "<br>"
+        to_save = "<p><i><div class='code'>" + o["line"] + "</div></i><br>"
+        to_save += "Name: " + o["name"] + "<br>"
         to_save += "Class: <a href='" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
         to_save += "Description: " + o["description"] + "<br>"
         if len(o["arguments"]) > 0:
