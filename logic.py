@@ -101,40 +101,42 @@ def logic(arg):
 
     # Saving index.html
     makedirs(output_path)
-    save_file = open(output_path + "index.html", "w")
-    save_content = "<h2>All methods with details in the project:</h2>"
+    with open(output_path + "index.html", "w") as index_file:
+        save_content = "<h2>All methods with details in the project:</h2>"
 
-    for o in objects:
-        save_content += "<br><p><i><div class='code'>" + o["line"] + "</div></i><br>"
-        save_content += "Name: " + o["name"] + "<br>"
-        save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
-        if o["description"] != "":
-            save_content += "Description: " + o["description"] + "<br>"
-        if len(o["arguments"]) > 0:
-            for argument in o["arguments"]:
-                save_content += "<i>Argument: " + argument["name"] + " - " + argument["description"] + "</i><br>"
-        if o["returns"] != "":
-            save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
-        save_content += "<hr>"
+        for o in objects:
+            save_content += "<br><p><i><div class='code'>" + o["line"] + "</div></i><br>"
+            save_content += "Name: " + o["name"] + "<br>"
+            save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
+            if o["description"] != "":
+                save_content += "Description: " + o["description"] + "<br>"
+            if len(o["arguments"]) > 0:
+                for argument in o["arguments"]:
+                    save_content += "<i>Argument: " + argument["name"] + " - " + argument["description"] + "</i><br>"
+            if o["returns"] != "":
+                save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
+            save_content += "<hr>"
 
-    save_file.write(before_html + save_content + after_html)
+        index_file.write(before_html + save_content + after_html)
+        index_file.close()
 
-    css_file = open(output_path + "styles.css", "w")
-    css_file.write(stylesheet)
+    # Saving CSS file
+    with open(output_path + "styles.css", "w") as stylesheet_file:
+        stylesheet_file.write(stylesheet)
 
     # Independent file for one method
     for o in objects:
-        independent_file_for_method = open(output_path + o["class"] + "_" +  o["name"] + ".html", "w")
-        to_save = "<p><i><div class='code'>" + o["line"] + "</div></i><br>"
-        to_save += "Name: " + o["name"] + "<br>"
-        to_save += "Class: <a href='" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
-        to_save += "Description: " + o["description"] + "<br>"
-        if len(o["arguments"]) > 0:
-            for a in o["arguments"]:
-                to_save += "<i>Arguments: " + a["name"] + " - " + a["description"] + "</i><br>"
-        to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
-        independent_file_for_method.write(before_html + to_save + after_html)
-        independent_file_for_method.close()
+        with open(output_path + o["class"] + "_" +  o["name"] + ".html", "w") as method_file:
+            to_save = "<p><i><div class='code'>" + o["line"] + "</div></i><br>"
+            to_save += "Name: " + o["name"] + "<br>"
+            to_save += "Class: <a href='" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
+            to_save += "Description: " + o["description"] + "<br>"
+            if len(o["arguments"]) > 0:
+                for a in o["arguments"]:
+                    to_save += "<i>Arguments: " + a["name"] + " - " + a["description"] + "</i><br>"
+            to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
+            method_file.write(before_html + to_save + after_html)
+            method_file.close()
 
     # Independent files for one class
     classes = []
@@ -144,37 +146,37 @@ def logic(arg):
     classes = list(set(classes))
 
     for c in classes:
-        independent_file_for_class = open(output_path + c + ".html", "w")
-        to_save = "<h2>" + c + "</h2>"
-        for o in objects:
-            if o["class"] == c:
-                to_save += "<p><a href = '" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
-        independent_file_for_class.write(before_html + to_save + after_html)
-        independent_file_for_class.close()
+        with open(output_path + c + ".html", "w") as class_file:
+            to_save = "<h2>" + c + "</h2>"
+            for o in objects:
+                if o["class"] == c:
+                    to_save += "<p><a href = '" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+                    class_file.write(before_html + to_save + after_html)
+            class_file.close()
 
     # Saving classes.html
-    class_file = open(output_path + "classes.html", "w")
-    class_file_content = "<h2>All classes in the project:</h2>"
+    with open(output_path + "classes.html", "w") as classes_file:
+        class_file_content = "<h2>All classes in the project:</h2>"
 
-    for c in classes:
-        class_file_content += "<p><a href='" + c + ".html'>" + c + "</a></p>"
+        for c in classes:
+            class_file_content += "<p><a href='" + c + ".html'>" + c + "</a></p>"
 
-    class_file.write(before_html + class_file_content + after_html)
-    class_file.close()
+        classes_file.write(before_html + class_file_content + after_html)
+        classes_file.close()
 
     # Saving methods.html
-    method = open(output_path + "methods.html", "w")
-    method_content = "<h2>All methods in the project: </h2>"
+    with open(output_path + "methods.html", "w") as method_file:
+        method_content = "<h2>All methods in the project: </h2>"
 
-    for o in objects:
-        method_content += "<p><a href='" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+        for o in objects:
+            method_content += "<p><a href='" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
 
-    method.write(before_html + method_content + after_html)
-    method.close()
+        method_file.write(before_html + method_content + after_html)
+        method_file.close()
 
     print("Writing html file completed.")
 
     if not path.exists(".documentator/settings.txt") or arg == "new":
-        settings_file = open(".documentator/settings.txt", "w")
-        settings_file.write("rel " + relative_path + "\n" + "ext " + extension + "\n" + "out " + output_path)
-        settings_file.close()
+        with open(".documentator/settings.txt", "w") as settings_file :
+            settings_file.write("rel " + relative_path + "\n" + "ext " + extension + "\n" + "out " + output_path)
+            settings_file.close()
