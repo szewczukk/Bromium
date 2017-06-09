@@ -7,7 +7,7 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
     class foobar
     {
         /*
-            ^[nam][isEqual]
+            ^[start]
             ^[cla][foobar]
             ^[des][Returns true if first bar is qual to second bar]
             ^[arg]<bar>[First bar]
@@ -18,7 +18,7 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
         {
             return bar == bar2 ? true : false;
         }
-        //^[nam][sum]
+        //^[start]
         //^[cla][foobar]
         //^[des][Returns sum of bar and bar2]
         //^[arg]<bar>[First bar]
