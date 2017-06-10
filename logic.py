@@ -98,7 +98,7 @@ def logic(arg):
     for o in objects:
         n = o["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "")
         name = n[:n.index("(")]
-        o["name"] = name
+        o["name"] = name.strip()
 
     # Deleting all files in output
     rmtree(output_path)
@@ -111,7 +111,8 @@ def logic(arg):
         for o in objects:
             save_content += "<br><p><i><div class='code'>" + o["line"] + "</div></i><br>"
             save_content += "Name: " + o["name"] + "<br>"
-            save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
+            if o["class"] != "":
+                save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
             if o["description"] != "":
                 save_content += "Description: " + o["description"] + "<br>"
             if len(o["arguments"]) > 0:
