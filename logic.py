@@ -9,7 +9,11 @@ def logic(arg):
     # Getting path of all files in directory
     dir_path = path.dirname(path.relpath(__file__))
 
-    if not path.exists(".documentator/settings.txt") or arg == "new":
+    relative_path = ""
+    extension = ""
+    output_path = ""
+
+    if not path.exists(".bromine/settings.txt") or arg == "new":
         relative_path = raw_input("Give relative path of header files location (e.g headers/): ")
         extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
         output_path = raw_input("Give path to catalog in witch create HTML documentation (e.g output/): ")
@@ -23,7 +27,7 @@ def logic(arg):
         if extension.startswith("."):
             extension = "." + extension
     else:
-        settings_file = open(".documentator/settings.txt", "r").read().splitlines()
+        settings_file = open(".bromine/settings.txt", "r").read().splitlines()
         for line in settings_file:
             if line.startswith("rel"):
                 relative_path = line[line.index(":") + 1:]
@@ -42,7 +46,7 @@ def logic(arg):
         makedirs(output_path)
 
     # Getting templates from XML
-    tree = ElementTree.parse(".documentator/templates.xml")
+    tree = ElementTree.parse(".bromine/templates.xml")
     before_html = tree.find('before_html').text
     after_html = tree.find('after_html').text
     stylesheet = tree.find('stylesheet').text
@@ -89,8 +93,8 @@ def logic(arg):
     print("Reading files completed.")
 
     for method in objects:
-        n = method["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "")
-        name = n[:n.index("(")]
+        name = method["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "")
+        name = name[:name.index("(")]
         method["name"] = name.strip()
 
     # Deleting all files in output
@@ -124,7 +128,7 @@ def logic(arg):
 
     # Independent file for one method
     for method in objects:
-        with open(output_path + method["class"] + "_" +  method["name"] + ".html", "w") as method_file:
+        with open(output_path + method["class"] + "_" + method["name"] + ".html", "w") as method_file:
             to_save = "<p><i><div class='code'>" + method["line"] + "</div></i><br>"
             to_save += "Name: " + method["name"] + "<br>"
             to_save += "Class: <a href='" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
@@ -176,7 +180,7 @@ def logic(arg):
 
     print("Writing html file completed.")
 
-    if not path.exists(".documentator/settings.txt") or arg == "new":
-        with open(".documentator/settings.txt", "w") as settings_file :
+    if not path.exists(".bromine/settings.txt") or arg == "new":
+        with open(".bromine/settings.txt", "w") as settings_file:
             settings_file.write("rel :" + relative_path + "\n" + "ext :" + extension + "\n" + "out :" + output_path)
             settings_file.close()

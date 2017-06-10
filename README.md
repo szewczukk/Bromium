@@ -1,8 +1,8 @@
-# documentator
+# Bromine
 
 is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
-## Example of documentator comments in C++
+## Example of Bromine comments in C++
 ```cpp
     class foobar
     {
@@ -34,17 +34,17 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
 ## Installation
 Just clone this repository at your project catalog
 
-    $ git clone https://github.com/bjornus/documentator
+    $ git clone https://github.com/bjornus/bromine
   
 ## How to  use
-Run documentator Python file
+Run Bromine Python file
 
-    $ python documentator.py
+    $ python bromine.py
 
 or
 
-    $ chmod +x documentator.py
-    $ ./documentator.py
+    $ chmod +x bromine.py
+    $ ./bromine.py
     
 Choose relative to this path of header files (eg. headers/)
     
@@ -54,7 +54,7 @@ Choose extension of files (e.g *.hpp)
     
     $ .hpp
 
-Choose directory to catalog in witch documentator have to create HTML files
+Choose directory to catalog in witch Bromine have to create HTML files
 
     $ output/
 
@@ -105,14 +105,14 @@ And your documentation is ready! Just look into output directory
 </table>
 
 ## Comments
-* All documentator comments start with ^ symbol
+* All Bromine comments start with ^ symbol
 * Add comment //headers after headers of method
 * Clone this repository in catalog where is all header files or down in hierarchy
-* To change template of HTML file or modificate CSS, modify templates.xml in .documentator catalog
-* Don't close HTML tags in .documentator/templates.xml file, those tags will be added in script
+* To change template of HTML file or modificate CSS, modify templates.xml in .bromine catalog
+* Don't close HTML tags in .bromine/templates.xml file, those tags will be added in script
 * If you want to create documentation comments in C/C++ file, use ALL of available comment types (table on top of README)
-* To set new settings without deleting settings file, add "new" argument when you call documentator.py file (python documentator.py new)
-* To modify page templates, add argument "modify" to calling documentator.py file
+* To set new settings without deleting settings file, add "new" argument when you call bromine.py file (python bromine.py new)
+* To modify page templates, add argument "modify" to calling bromine.py file
 
 ## Licensing
-To see the license of documentator, open <a href="https://github.com/bjornus/documentator/blob/master/LICENSE" target="_blank">LICENSE</a> file.
+To see the license of Bromine, open <a href="https://github.com/bjornus/bromine/blob/master/LICENSE" target="_blank">LICENSE</a> file.

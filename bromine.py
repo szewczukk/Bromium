@@ -11,7 +11,7 @@ except IndexError:
 if arg == "modify":
     from os import system
 
-    system("gedit .documentator/templates.xml")
+    system("gedit .bromine/templates.xml")
 
 # If there is no detectable argument
 else:
