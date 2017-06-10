@@ -14,13 +14,13 @@ def logic(arg):
         extension = raw_input("Give extension of header files (e.g .h / .hpp): ")
         output_path = raw_input("Give path to catalog in witch create HTML documentation (e.g output/): ")
 
-        if relative_path[-1:] != "/":
+        if not relative_path.endswith("/"):
             relative_path += "/"
 
-        if output_path[-1:] != "/":
+        if not output_path.endswith("/"):
             output_path += "/"
 
-        if extension[:0] != ".":
+        if extension.startswith("."):
             extension = "." + extension
     else:
         settings_file = open(".documentator/settings.txt", "r").read().splitlines()
@@ -88,10 +88,10 @@ def logic(arg):
 
     print("Reading files completed.")
 
-    for o in objects:
-        n = o["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "")
+    for method in objects:
+        n = method["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "")
         name = n[:n.index("(")]
-        o["name"] = name.strip()
+        method["name"] = name.strip()
 
     # Deleting all files in output
     rmtree(output_path)
@@ -103,13 +103,13 @@ def logic(arg):
 
         for method in objects:
             save_content += "<br><p><i><div class='code'>" + method["line"] + "</div></i><br>"
-            save_content += "Name: " + o["name"] + "<br>"
+            save_content += "Name: " + method["name"] + "<br>"
             if method["class"] != "":
                 save_content += "Class: <a href = '" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
             if method["description"] != "":
                 save_content += "Description: " + method["description"] + "<br>"
             if len(method["arguments"]) > 0:
-                for argument in o["arguments"]:
+                for argument in method["arguments"]:
                     save_content += "<i>Argument: " + argument["name"] + " - " + argument["description"] + "</i><br>"
             if method["returns"] != "":
                 save_content += "<i>Returning: " + method["returns"] + "</i><br></p>"
@@ -125,14 +125,14 @@ def logic(arg):
     # Independent file for one method
     for method in objects:
         with open(output_path + method["class"] + "_" +  method["name"] + ".html", "w") as method_file:
-            to_save = "<p><i><div class='code'>" + o["line"] + "</div></i><br>"
+            to_save = "<p><i><div class='code'>" + method["line"] + "</div></i><br>"
             to_save += "Name: " + method["name"] + "<br>"
             to_save += "Class: <a href='" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
             to_save += "Description: " + method["description"] + "<br>"
             if len(method["arguments"]) > 0:
                 for argument in method["arguments"]:
                     to_save += "<i>Arguments: " + argument["name"] + " - " + argument["description"] + "</i><br>"
-            to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
+            to_save += "<i>Returning: " + method["returns"] + "</i><br></p>"
             method_file.write(before_html + to_save + after_html)
             method_file.close()
 
