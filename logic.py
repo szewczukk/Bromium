@@ -101,23 +101,35 @@ def logic(arg):
     rmtree(output_path)
 
     # Saving index.html
+    template = """
+        <p>
+            <i>
+                <div class='code'>
+                    {line}
+                </div>
+            </i><br>
+            Name: {name} <br>
+            Class: <a href='{cla}.html'>{cla} </a> <br>
+            Description: {description} <br>
+            {arg} <br>
+            <i>
+                Returning: {returns}
+            </i> <br>
+        </p>
+        <hr><br>
+    """
     makedirs(output_path)
     with open(output_path + "index.html", "w") as index_file:
         save_content = "<h2>All methods with details in the project:</h2>"
 
-        for method in objects:
-            save_content += "<br><p><i><div class='code'>" + method["line"] + "</div></i><br>"
-            save_content += "Name: " + method["name"] + "<br>"
-            if method["class"] != "":
-                save_content += "Class: <a href = '" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
-            if method["description"] != "":
-                save_content += "Description: " + method["description"] + "<br>"
-            if len(method["arguments"]) > 0:
-                for argument in method["arguments"]:
-                    save_content += "<i>Argument: " + argument["name"] + " - " + argument["description"] + "</i><br>"
-            if method["returns"] != "":
-                save_content += "<i>Returning: " + method["returns"] + "</i><br></p>"
-            save_content += "<hr>"
+        for obj in objects:
+            args = ""
+            if len(obj["arguments"]) > 0:
+                for argument in obj["arguments"]:
+                        args += str("Argument {name} = {description} <br>".format(name=argument["name"],
+                                                                                  description=argument["description"]))
+                save_content += template.format(line=obj["line"], name=obj["name"], cla=obj["class"],
+                                                description=obj["description"], arg=args, returns=obj["returns"])
 
         index_file.write(before_html + save_content + after_html)
         index_file.close()
@@ -125,55 +137,91 @@ def logic(arg):
     # Saving CSS file
     with open(output_path + "styles.css", "w") as stylesheet_file:
         stylesheet_file.write(stylesheet)
+        stylesheet_file.close()
 
     # Independent file for one method
+    template = """
+        <p>
+            <i><div class='code'>
+                {line}
+            </i></div>
+            Name: {name} <br>
+            Class: <a href='{cla}.html'>{cla}</a><br>
+            {args}
+            Description: {description} <br>
+            <i>
+                Returning: {returns}
+            </i><br>
+        </p>
+    """
+
     for method in objects:
+        arguments = ""
         with open(output_path + method["class"] + "_" + method["name"] + ".html", "w") as method_file:
-            to_save = "<p><i><div class='code'>" + method["line"] + "</div></i><br>"
-            to_save += "Name: " + method["name"] + "<br>"
-            to_save += "Class: <a href='" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
-            to_save += "Description: " + method["description"] + "<br>"
             if len(method["arguments"]) > 0:
                 for argument in method["arguments"]:
-                    to_save += "<i>Arguments: " + argument["name"] + " - " + argument["description"] + "</i><br>"
-            to_save += "<i>Returning: " + method["returns"] + "</i><br></p>"
+                    arguments += str("Argument {name} = {description} <br>".format(name=argument["name"],
+                                                                                   description=argument["description"]))
+            to_save = template.format(line=method["line"], name=method["name"], cla=method["class"],
+                                      description=method["description"], returns=method["returns"], args=arguments)
+
             method_file.write(before_html + to_save + after_html)
             method_file.close()
 
     # Independent files for one class
     classes = []
-    for o in objects:
-        classes.append(o["class"])
+    for obj in objects:
+        classes.append(obj["class"])
 
     classes = list(set(classes))
 
-    for clas in classes:
-        with open(output_path + clas + ".html", "w") as class_file:
-            to_save = "<h2>" + clas + "</h2>"
-            for o in objects:
-                if o["class"] == clas:
-                    to_save += "<p><a href = '" + o["class"] + "_" + o["name"] + ".html'>" + \
-                               o["class"] + " : " + o["name"] + "</a></p>"
+    template = """
+        <p>
+            <a href='{cla}_{name}.html'>
+                {cla} : {name}
+            </a>
+        </p>
+    """
+
+    for cla in classes:
+        with open(output_path + cla + ".html", "w") as class_file:
+            to_save = "<h2>" + cla + "</h2>"
+            for obj in objects:
+                if obj["class"] == cla:
+                    to_save += template.format(cla=obj["class"], name=obj["name"])
                     class_file.write(before_html + to_save + after_html)
             class_file.close()
 
     # Saving classes.html
+    template = """
+        <p>
+            <a href='{cla}.html'>
+                {cla}
+            </a>
+        </p>
+    """
     with open(output_path + "classes.html", "w") as classes_file:
         class_file_content = "<h2>All classes in the project:</h2>"
 
-        for clas in classes:
-            class_file_content += "<p><a href='" + clas + ".html'>" + clas + "</a></p>"
+        for cla in classes:
+            class_file_content += template.format(cla=cla)
 
         classes_file.write(before_html + class_file_content + after_html)
         classes_file.close()
 
     # Saving methods.html
+    template = """
+        <p>
+            <a href='{cla}_{name}.html'>
+                {cla} : {name}
+            </a>
+        </p>
+    """
     with open(output_path + "methods.html", "w") as method_file:
         method_content = "<h2>All methods in the project: </h2>"
 
         for method in objects:
-            method_content += "<p><a href='" + method["class"] + "_" + method["name"] + ".html'>" + \
-                              method["class"] + " : " + method["name"] + "</a></p>"
+            method_content += template.format(cla=method["class"], name=method["name"])
 
         method_file.write(before_html + method_content + after_html)
         method_file.close()
