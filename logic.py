@@ -56,19 +56,13 @@ def logic(arg):
         for line in f:
             line = line.strip()
             if line[:1] == "^":
-                operator_start = line.index("[") + 1
-                operator_end = line.index("]")
-
-                operator = line[operator_start:operator_end]
-
-                content_start = line.rindex("[") + 1
-                content_end = line.rindex("]")
-
-                content = line[content_start:content_end]
+                operator = line[line.index("[") + 1:line.index("]")]
+                content = line[line.rindex("[") + 1:line.rindex("]")]
 
                 # If name comment was detect
                 if operator == "sta" or operator == "start":
-                    objects.append({"name": "", "description": "", "arguments": [], "returns": "", "class": "", "line": ""})
+                    d = {"name": "", "description": "", "arguments": [], "returns": "", "class": "", "line": ""}
+                    objects.append(d)
 
                 # If description comment was detect
                 if operator == "dec" or operator == "description":
@@ -76,11 +70,10 @@ def logic(arg):
 
                 # If argument comment was detect
                 if operator == "arg" or operator == "argument":
-                    argument = {"name": "", "description": ""}
-                    start = line.index("<")
-                    end = line.index(">")
-                    argument["name"] = line[start:end].replace("<", "").replace(">", "")
-                    argument["description"] = content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
+                    argument = dict()
+                    argument["name"] = line[line.index("<"):line.index(">")].replace("<", "").replace(">", "")
+                    argument["description"] = \
+                        content.replace("<", "").replace(">", "").replace("[", "").replace("]", "")
                     objects[len(objects) - 1]["arguments"].append(argument)
 
                 # If returning comment was detect
@@ -108,18 +101,18 @@ def logic(arg):
     with open(output_path + "index.html", "w") as index_file:
         save_content = "<h2>All methods with details in the project:</h2>"
 
-        for o in objects:
-            save_content += "<br><p><i><div class='code'>" + o["line"] + "</div></i><br>"
+        for method in objects:
+            save_content += "<br><p><i><div class='code'>" + method["line"] + "</div></i><br>"
             save_content += "Name: " + o["name"] + "<br>"
-            if o["class"] != "":
-                save_content += "Class: <a href = '" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
-            if o["description"] != "":
-                save_content += "Description: " + o["description"] + "<br>"
-            if len(o["arguments"]) > 0:
+            if method["class"] != "":
+                save_content += "Class: <a href = '" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
+            if method["description"] != "":
+                save_content += "Description: " + method["description"] + "<br>"
+            if len(method["arguments"]) > 0:
                 for argument in o["arguments"]:
                     save_content += "<i>Argument: " + argument["name"] + " - " + argument["description"] + "</i><br>"
-            if o["returns"] != "":
-                save_content += "<i>Returning: " + o["returns"] + "</i><br></p>"
+            if method["returns"] != "":
+                save_content += "<i>Returning: " + method["returns"] + "</i><br></p>"
             save_content += "<hr>"
 
         index_file.write(before_html + save_content + after_html)
@@ -130,15 +123,15 @@ def logic(arg):
         stylesheet_file.write(stylesheet)
 
     # Independent file for one method
-    for o in objects:
-        with open(output_path + o["class"] + "_" +  o["name"] + ".html", "w") as method_file:
+    for method in objects:
+        with open(output_path + method["class"] + "_" +  method["name"] + ".html", "w") as method_file:
             to_save = "<p><i><div class='code'>" + o["line"] + "</div></i><br>"
-            to_save += "Name: " + o["name"] + "<br>"
-            to_save += "Class: <a href='" + o["class"] + ".html'>" + o["class"] + "</a><br>\n"
-            to_save += "Description: " + o["description"] + "<br>"
-            if len(o["arguments"]) > 0:
-                for a in o["arguments"]:
-                    to_save += "<i>Arguments: " + a["name"] + " - " + a["description"] + "</i><br>"
+            to_save += "Name: " + method["name"] + "<br>"
+            to_save += "Class: <a href='" + method["class"] + ".html'>" + method["class"] + "</a><br>\n"
+            to_save += "Description: " + method["description"] + "<br>"
+            if len(method["arguments"]) > 0:
+                for argument in method["arguments"]:
+                    to_save += "<i>Arguments: " + argument["name"] + " - " + argument["description"] + "</i><br>"
             to_save += "<i>Returning: " + o["returns"] + "</i><br></p>"
             method_file.write(before_html + to_save + after_html)
             method_file.close()
@@ -150,12 +143,13 @@ def logic(arg):
 
     classes = list(set(classes))
 
-    for c in classes:
-        with open(output_path + c + ".html", "w") as class_file:
-            to_save = "<h2>" + c + "</h2>"
+    for clas in classes:
+        with open(output_path + clas + ".html", "w") as class_file:
+            to_save = "<h2>" + clas + "</h2>"
             for o in objects:
-                if o["class"] == c:
-                    to_save += "<p><a href = '" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+                if o["class"] == clas:
+                    to_save += "<p><a href = '" + o["class"] + "_" + o["name"] + ".html'>" + \
+                               o["class"] + " : " + o["name"] + "</a></p>"
                     class_file.write(before_html + to_save + after_html)
             class_file.close()
 
@@ -163,8 +157,8 @@ def logic(arg):
     with open(output_path + "classes.html", "w") as classes_file:
         class_file_content = "<h2>All classes in the project:</h2>"
 
-        for c in classes:
-            class_file_content += "<p><a href='" + c + ".html'>" + c + "</a></p>"
+        for clas in classes:
+            class_file_content += "<p><a href='" + clas + ".html'>" + clas + "</a></p>"
 
         classes_file.write(before_html + class_file_content + after_html)
         classes_file.close()
@@ -173,8 +167,9 @@ def logic(arg):
     with open(output_path + "methods.html", "w") as method_file:
         method_content = "<h2>All methods in the project: </h2>"
 
-        for o in objects:
-            method_content += "<p><a href='" + o["class"] + "_" + o["name"] + ".html'>" + o["class"] + " : " + o["name"] + "</a></p>"
+        for method in objects:
+            method_content += "<p><a href='" + method["class"] + "_" + method["name"] + ".html'>" + \
+                              method["class"] + " : " + method["name"] + "</a></p>"
 
         method_file.write(before_html + method_content + after_html)
         method_file.close()
