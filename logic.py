@@ -93,7 +93,8 @@ def logic(arg):
     print("Reading files completed.")
 
     for method in objects:
-        name = method["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "")
+        name = method["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "").\
+            replace("double", "").replace("unsigned int", "").replace("short", "").replace("unsigned short", "")
         name = name[:name.index("(")]
         method["name"] = name.strip()
 
