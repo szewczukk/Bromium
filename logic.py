@@ -25,12 +25,12 @@ def logic(arg):
     else:
         settings_file = open(".documentator/settings.txt", "r").read().splitlines()
         for line in settings_file:
-            if line[:3] == "rel":
-                relative_path = line[4:]
-            elif line[:3] == "ext":
-                extension = line[4:]
-            elif line[:3] == "out":
-                output_path = line[4:]
+            if line.startswith("rel"):
+                relative_path = line[line.index(":") + 1:]
+            elif line.startswith("ext"):
+                extension = line[line.index(":") + 1:]
+            elif line.startswith("out"):
+                output_path = line[line.index(":") + 1:]
 
     header_glob = glob(dir_path + relative_path + "*" + extension)
 
@@ -55,7 +55,7 @@ def logic(arg):
         f = open(curr_file, 'r').read().splitlines()
         for line in f:
             line = line.strip()
-            if line[:1] == "^":
+            if line.startswith("^"):
                 operator = line[line.index("[") + 1:line.index("]")]
                 content = line[line.rindex("[") + 1:line.rindex("]")]
 
@@ -178,5 +178,5 @@ def logic(arg):
 
     if not path.exists(".documentator/settings.txt") or arg == "new":
         with open(".documentator/settings.txt", "w") as settings_file :
-            settings_file.write("rel " + relative_path + "\n" + "ext " + extension + "\n" + "out " + output_path)
+            settings_file.write("rel :" + relative_path + "\n" + "ext :" + extension + "\n" + "out :" + output_path)
             settings_file.close()
