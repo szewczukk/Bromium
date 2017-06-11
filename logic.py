@@ -111,8 +111,8 @@ def logic(arg):
             args = ""
             if len(obj["arguments"]) > 0:
                 for argument in obj["arguments"]:
-                        args += str("Argument {name} = {description} <br>".format(name=argument["name"],
-                                                                                  description=argument["description"]))
+                    args += tree.find("argument_template").text.format(name=argument["name"],
+                                                                       description=argument["description"])
                 save_content += template.format(line=obj["line"], name=obj["name"], cla=obj["class"],
                                                 description=obj["description"], arg=args, returns=obj["returns"])
 
@@ -127,14 +127,14 @@ def logic(arg):
     # Independent file for one method
     template = tree.find("method_template").text
     for method in objects:
-        arguments = ""
+        args = ""
         with open(output_path + method["class"] + "_" + method["name"] + ".html", "w") as method_file:
             if len(method["arguments"]) > 0:
                 for argument in method["arguments"]:
-                    arguments += str("Argument {name} = {description} <br>".format(name=argument["name"],
-                                                                                   description=argument["description"]))
+                    args += tree.find("argument_template").text.format(name=argument["name"],
+                                                                       description=argument["description"])
             to_save = template.format(line=method["line"], name=method["name"], cla=method["class"],
-                                      description=method["description"], returns=method["returns"], args=arguments)
+                                      description=method["description"], returns=method["returns"], arg=args)
 
             method_file.write(before_html + to_save + after_html)
             method_file.close()

@@ -75,7 +75,7 @@ a {
         Name: {name} <br>
         Class: <a href='{cla}.html'>{cla} </a> <br>
         Description: {description} <br>
-        {arg} <br>
+        {arg} <!-- argument_template -->
         <i>
             Returning: {returns}
         </i> <br>
@@ -91,7 +91,7 @@ a {
         </i></div>
         Name: {name} <br>
         Class: <a href='{cla}.html'>{cla}</a><br>
-        {args}
+        {arg}   <!-- argument_template -->
         Description: {description} <br>
         <i>
             Returning: {returns}
@@ -126,4 +126,9 @@ a {
     </p>
 ]]>
     </classes_template>
+    <argument_template>
+<![CDATA[
+    Argument {name} = {description} <br>
+]]>
+    </argument_template>
 </templates>
