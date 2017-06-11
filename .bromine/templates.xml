@@ -64,25 +64,6 @@ a {
 }
 ]]>
     </stylesheet>
-    <index_template>
-<![CDATA[
-    <p>
-        <i>
-            <div class='code'>
-                {line}
-            </div>
-        </i><br>
-        Name: {name} <br>
-        Class: <a href='{cla}.html'>{cla} </a> <br>
-        Description: {description} <br>
-        {arg} <!-- argument_template -->
-        <i>
-            Returning: {returns}
-        </i> <br>
-    </p>
-    <hr><br>
-]]>
-    </index_template>
     <method_template>
 <![CDATA[
     <p>
@@ -108,15 +89,6 @@ a {
     </p>
 ]]>
     </class_template>
-    <methods_template>
-<![CDATA[
-        <p>
-            <a href='{cla}_{name}.html'>
-                {cla} : {name}
-            </a>
-        </p>
-]]>
-    </methods_template>
     <classes_template>
 <![CDATA[
     <p>

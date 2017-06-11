@@ -102,7 +102,7 @@ def logic(arg):
     rmtree(output_path)
 
     # Saving index.html
-    template = tree.find("index_template").text
+    template = tree.find("method_template").text
     makedirs(output_path)
     with open(output_path + "index.html", "w") as index_file:
         save_content = "<h2>All methods with details in the project:</h2>"
@@ -168,7 +168,7 @@ def logic(arg):
         classes_file.close()
 
     # Saving methods.html
-    template = tree.find("methods_template").text
+    template = tree.find("class_template").text
     with open(output_path + "methods.html", "w") as method_file:
         method_content = "<h2>All methods in the project: </h2>"
 
