@@ -102,23 +102,7 @@ def logic(arg):
     rmtree(output_path)
 
     # Saving index.html
-    template = """
-        <p>
-            <i>
-                <div class='code'>
-                    {line}
-                </div>
-            </i><br>
-            Name: {name} <br>
-            Class: <a href='{cla}.html'>{cla} </a> <br>
-            Description: {description} <br>
-            {arg} <br>
-            <i>
-                Returning: {returns}
-            </i> <br>
-        </p>
-        <hr><br>
-    """
+    template = tree.find("index_template").text
     makedirs(output_path)
     with open(output_path + "index.html", "w") as index_file:
         save_content = "<h2>All methods with details in the project:</h2>"
@@ -141,21 +125,7 @@ def logic(arg):
         stylesheet_file.close()
 
     # Independent file for one method
-    template = """
-        <p>
-            <i><div class='code'>
-                {line}
-            </i></div>
-            Name: {name} <br>
-            Class: <a href='{cla}.html'>{cla}</a><br>
-            {args}
-            Description: {description} <br>
-            <i>
-                Returning: {returns}
-            </i><br>
-        </p>
-    """
-
+    template = tree.find("method_template").text
     for method in objects:
         arguments = ""
         with open(output_path + method["class"] + "_" + method["name"] + ".html", "w") as method_file:
@@ -176,14 +146,7 @@ def logic(arg):
 
     classes = list(set(classes))
 
-    template = """
-        <p>
-            <a href='{cla}_{name}.html'>
-                {cla} : {name}
-            </a>
-        </p>
-    """
-
+    template = tree.find("class_template").text
     for cla in classes:
         with open(output_path + cla + ".html", "w") as class_file:
             to_save = "<h2>" + cla + "</h2>"
@@ -194,13 +157,7 @@ def logic(arg):
             class_file.close()
 
     # Saving classes.html
-    template = """
-        <p>
-            <a href='{cla}.html'>
-                {cla}
-            </a>
-        </p>
-    """
+    template = tree.find("classes_template").text
     with open(output_path + "classes.html", "w") as classes_file:
         class_file_content = "<h2>All classes in the project:</h2>"
 
@@ -211,13 +168,7 @@ def logic(arg):
         classes_file.close()
 
     # Saving methods.html
-    template = """
-        <p>
-            <a href='{cla}_{name}.html'>
-                {cla} : {name}
-            </a>
-        </p>
-    """
+    template = tree.find("methods_template").text
     with open(output_path + "methods.html", "w") as method_file:
         method_content = "<h2>All methods in the project: </h2>"
 

@@ -4,64 +4,126 @@
         HTML in CDATA is the HTML that renders before added content
     -->
     <before_html>
-        <![CDATA[
-        <!DOCTYPE html>
-        <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Title</title>
+<![CDATA[
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
 
-                <link rel="stylesheet" href="styles.css">
-            </head>
-            <body>
-                <div id="wrapper">
-                    <header style="text-align:center">
-                        <h1>Bromine</h1>
-                        <div style="display:inline-block">
-                            <a href="methods.html">All methods</a>
-                        </div>
-                        &nbsp;|&nbsp;
-                        <div style="display:inline-block">
-                            <a href="index.html">Index</a>
-                        </div>
-                        &nbsp;|&nbsp;
-                        <div style="display:inline-block">
-                            <a href="classes.html">All Classes</a>
-                        </div>
-                    </header>
-        ]]>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <header style="text-align:center">
+                <h1>Bromine</h1>
+                <div style="display:inline-block">
+                    <a href="methods.html">All methods</a>
+                </div>
+                &nbsp;|&nbsp;
+                <div style="display:inline-block">
+                    <a href="index.html">Index</a>
+                </div>
+                &nbsp;|&nbsp;
+                <div style="display:inline-block">
+                    <a href="classes.html">All Classes</a>
+                </div>
+            </header>
+]]>
     </before_html>
     <!---
         HTML in CDATA is the HTML that renders after added content
     -->
     <after_html>
-        <![CDATA[
-                </div>
-            </body>
-        </html>
-        ]]>
+<![CDATA[
+        </div>
+    </body>
+</html>
+]]>
     </after_html>
     <!---
         CSS of web page
     -->
     <stylesheet>
-        <![CDATA[
-        * {
-            padding: 0px;
-            margin: 0px;
-        }
-        #wrapper {
-            width:1000px;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:50px;
-        }
-        a {
-            color: inherit;
-        }
-        .code {
-            background-color:lightblue;
-        }
-        ]]>
+<![CDATA[
+* {
+    padding: 0px;
+    margin: 0px;
+}
+#wrapper {
+    width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:50px;
+}
+a {
+    color: inherit;
+}
+.code {
+    background-color:lightblue;
+}
+]]>
     </stylesheet>
+    <index_template>
+<![CDATA[
+    <p>
+        <i>
+            <div class='code'>
+                {line}
+            </div>
+        </i><br>
+        Name: {name} <br>
+        Class: <a href='{cla}.html'>{cla} </a> <br>
+        Description: {description} <br>
+        {arg} <br>
+        <i>
+            Returning: {returns}
+        </i> <br>
+    </p>
+    <hr><br>
+]]>
+    </index_template>
+    <method_template>
+<![CDATA[
+    <p>
+        <i><div class='code'>
+            {line}
+        </i></div>
+        Name: {name} <br>
+        Class: <a href='{cla}.html'>{cla}</a><br>
+        {args}
+        Description: {description} <br>
+        <i>
+            Returning: {returns}
+        </i><br>
+    </p>
+]]>
+    </method_template>
+    <class_template>
+<![CDATA[
+    <p>
+        <a href='{cla}_{name}.html'>
+            {cla} : {name}
+        </a>
+    </p>
+]]>
+    </class_template>
+    <methods_template>
+<![CDATA[
+        <p>
+            <a href='{cla}_{name}.html'>
+                {cla} : {name}
+            </a>
+        </p>
+]]>
+    </methods_template>
+    <classes_template>
+<![CDATA[
+    <p>
+        <a href='{cla}.html'>
+            {cla}
+        </a>
+    </p>
+]]>
+    </classes_template>
 </templates>
