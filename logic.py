@@ -148,7 +148,7 @@ def logic(arg):
             for obj in objects:
                 if obj["class"] == cla:
                     to_save += template.format(cla=obj["class"], name=obj["name"])
-                    class_file.write(before_html + to_save + after_html)
+            class_file.write(before_html + to_save + after_html)
             class_file.close()
 
     # Saving classes.html
