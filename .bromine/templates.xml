@@ -28,6 +28,7 @@
                 <div style="display:inline-block">
                     <a href="classes.html">All Classes</a>
                 </div>
+                <hr>
             </header>
 ]]>
     </before_html>
@@ -67,17 +68,21 @@ a {
     <method_template>
 <![CDATA[
     <p>
-        <i><div class='code'>
-            {line}
-        </i></div>
+        <div class='code'>
+            <i>
+                {line}
+            </i>
+        </div>
         Name: {name} <br>
         Class: <a href='{cla}.html'>{cla}</a><br>
         {arg}   <!-- argument_template -->
         Description: {description} <br>
         <i>
             Returning: {returns}
-        </i><br>
+        </i>
+        <br>
     </p>
+    <hr>
 ]]>
     </method_template>
     <class_template>
