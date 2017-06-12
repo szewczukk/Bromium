@@ -113,6 +113,7 @@ And your documentation is ready! Just look into output directory
 * If you want to create documentation comments in C/C++ file, use ALL of available comment types (table on top of README)
 * To set new settings without deleting settings file, add "new" argument when you call bromine.py file (python bromine.py new)
 * To modify page templates, add argument "modify" to calling bromine.py file
+* If there is couple of methods with same name, give them different names in comments
 
 ## Licensing
 To see the license of Bromine, open <a href="https://github.com/bjornus/bromine/blob/master/LICENSE" target="_blank">LICENSE</a> file.

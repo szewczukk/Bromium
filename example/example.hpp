@@ -1,7 +1,7 @@
 class foobar
 {
     /*
-        ^[start]
+        ^[name][isEqual]
         ^[class][foobar]
         ^[description][Returns true if first bar is equal to second bar]
         ^[argument]<bar>[First bar]

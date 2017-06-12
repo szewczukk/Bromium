@@ -64,9 +64,10 @@ def logic(arg):
                 content = line[line.rindex("[") + 1:line.rindex("]")]
 
                 # If name comment was detect
-                if operator == "sta" or operator == "start":
+                if operator == "nam" or operator == "name":
                     d = {"name": "", "description": "", "arguments": [], "returns": "", "class": "", "line": ""}
                     objects.append(d)
+                    objects[len(objects) - 1]["name"] = content
 
                 # If description comment was detect
                 if operator == "dec" or operator == "description":
@@ -91,12 +92,6 @@ def logic(arg):
                 objects[len(objects) - 1]["line"] = line.replace("//^header", "")
 
     print("Reading files completed.")
-
-    for method in objects:
-        name = method["line"].replace("void", "").replace("float", "").replace("int", "").replace("bool", "").\
-            replace("double", "").replace("unsigned int", "").replace("short", "").replace("unsigned short", "")
-        name = name[:name.index("(")]
-        method["name"] = name.strip()
 
     # Deleting all files in output
     rmtree(output_path)
