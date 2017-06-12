@@ -7,12 +7,12 @@ is simple <a href="https://www.python.org" target="_blank">Python</a> tool to cr
     class foobar
     {
         /*
-            ^[start]
-            ^[cla][foobar]
-            ^[des][Returns true if first bar is qual to second bar]
-            ^[arg]<bar>[First bar]
-            ^[arg]<bar2>[Second bar]
-            ^[ret][bool when first bar is equal to second]
+            ^[name][isEqual]
+            ^[class][foobar]
+            ^[description][Returns true if first bar is qual to second bar]
+            ^[argument]<bar>[First bar]
+            ^[argument]<bar2>[Second bar]
+            ^[retutns][bool when first bar is equal to second]
         */
         bool isEqual(int bar, int bar2) //^header
         {
