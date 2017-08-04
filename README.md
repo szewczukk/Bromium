@@ -1,8 +1,8 @@
-# Bromine
+# Bromium
 
 is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
-## Example of Bromine comments in C++
+## Example of Bromium comments in C++
 ```cpp
     class foobar
     {
@@ -105,7 +105,7 @@ And your documentation is ready! Just look into output directory
 </table>
 
 ## Comments
-* All Bromine comments start with ^ symbol
+* All Bromium comments start with ^ symbol
 * Add comment //headers after headers of method
 * Clone this repository in catalog where is all header files or down in hierarchy
 * To change template of HTML file or modificate CSS, modify templates.xml in .bromine catalog
@@ -116,4 +116,4 @@ And your documentation is ready! Just look into output directory
 * If there is couple of methods with same name, give them different names in comments
 
 ## Licensing
-To see the license of Bromine, open <a href="https://github.com/bjornus/bromine/blob/master/LICENSE" target="_blank">LICENSE</a> file.
+To see the license of Bromine, open <a href="https://github.com/bjornus/bromium/blob/master/LICENSE" target="_blank">LICENSE</a> file.
