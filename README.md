@@ -1,4 +1,6 @@
-# Bromium
+<p align="center">
+    <img src="/logo.png">
+</p>
 
 is simple <a href="https://www.python.org" target="_blank">Python</a> tool to create documentation from C/C++ header files
 
